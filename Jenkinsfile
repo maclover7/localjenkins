@@ -17,8 +17,16 @@ pipeline {
             }
           }
           stage('aix run tests') {
-            steps {
-              sh 'echo \'hi\''
+            stage('starting') {
+              steps {
+                sh 'echo "aix starting"'
+              }
+            }
+            
+            stage('aix first machine') {
+              steps {
+                sh 'echo \'hi\''
+              }
             }
             
             post {
