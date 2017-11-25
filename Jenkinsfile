@@ -10,7 +10,7 @@ pipeline {
           agent any
           steps {
             script {
-              if (!env.CERTIFY_SAFE) {
+              if (!params.CERTIFY_SAFE) {
                 error("CERTIFY_SAFE must be true") }
               }
               
@@ -28,8 +28,5 @@ pipeline {
           }
         }
       }
-    }
-    environment {
-      CERTIFY_SAFE = 'true'
     }
   }
