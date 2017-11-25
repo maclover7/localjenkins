@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  parameters {
+    boolean(name: "CERTIFY_SAFE", defaultValue: false)
+  }
   stages {
     stage('Ensure safe') {
       parallel {
