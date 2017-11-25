@@ -2,10 +2,31 @@ pipeline {
   agent any
   stages {
     stage('Ensure safe') {
-      agent any
-      steps {
-        error 'CERTIFY_SAFE must be true.'
+      parallel {
+        stage('Ensure safe') {
+          agent any
+          steps {
+            script {
+              if (!env.CERTIFY_SAFE) {
+                error("CERTIFY_SAFE must be true") }
+              }
+              
+            }
+          }
+          stage('aix run tests') {
+            steps {
+              sh 'echo \'hi\''
+            }
+          }
+          stage('linux run tests') {
+            steps {
+              sh 'echo \'hi2\''
+            }
+          }
+        }
       }
     }
+    environment {
+      CERTIFY_SAFE = 'true'
+    }
   }
-}
